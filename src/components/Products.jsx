@@ -23,21 +23,21 @@ export default function Products() {
           تصفح أقسامنا
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((p, i) => (
+          {products.map((el, index) => (
             <a
-              key={i}
+              key={index}
               href="#"
               className="group block text-center"
             >
               <div className="relative overflow-hidden rounded-2xl border-2 border-gray-200 group-hover:border-blue-500 transition-all duration-300 shadow-lg group-hover:shadow-xl p-2 bg-white">
                 <img
-                  src={p.img}
-                  alt={p.title}
+                  src={el.img}
+                  alt={el.title}
                   className="w-full h-72 object-cover rounded-xl transform group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <h3 className="text-xl font-bold mt-4 text-gray-800 group-hover:text-blue-600 transition-colors">
-                {p.title}
+                {el.title}
               </h3>
             </a>
           ))}

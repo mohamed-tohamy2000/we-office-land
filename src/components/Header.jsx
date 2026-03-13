@@ -24,7 +24,7 @@ export default function Header() {
             href="#products"
             className="text-gray-600 hover:text-blue-600 transition duration-300"
           >
-            منتجاتنا
+            Doctors
           </a>
           <a
             href="#testimonials"
@@ -43,7 +43,7 @@ export default function Header() {
           href="#contact"
           className="hidden md:block bg-blue-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 shadow-md"
         >
-          اطلب استشارة
+          Login
         </a>
         <button
         className="md:hidden text-gray-950 text-2xl"
