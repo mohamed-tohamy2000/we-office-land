@@ -28,10 +28,13 @@ export default function Footer() {
         <div className="space-y-4">
           <h4 className="text-lg font-bold text-[#f3e4c7]">بيانات التواصل</h4>
           <div className="space-y-3 text-white/70">
-            <p className="inline-flex items-center gap-2">
-              <HiOutlinePhone />
-              {siteConfig.phoneDisplay}
-            </p>
+            <a
+            href={`tel:${siteConfig.phone}`}
+            className="inline-flex items-center gap-2 hover:text-white transition"
+          >
+            <HiOutlinePhone />
+            <span dir="ltr">{siteConfig.phoneDisplay}</span>
+          </a>
             <p className="inline-flex items-center gap-2">
               <HiOutlineEnvelope />
               {siteConfig.email}

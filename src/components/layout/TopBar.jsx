@@ -8,15 +8,22 @@ export default function TopBar() {
         <p className="font-semibold text-white/90">
           أثاث مكتبي فاخر للمكاتب التنفيذية، الاستقبال، وغرف الاجتماعات.
         </p>
+
         <div className="flex flex-wrap items-center gap-4 text-white/80">
-          <span className="inline-flex items-center gap-2">
+          
+          <a
+            href={`tel:${siteConfig.phone}`}
+            className="inline-flex items-center gap-2 hover:text-white transition"
+          >
             <HiOutlinePhone />
-            {siteConfig.phoneDisplay}
-          </span>
+            <span dir="ltr">{siteConfig.phoneDisplay}</span>
+          </a>
+
           <span className="inline-flex items-center gap-2">
             <HiMiniMapPin />
             {siteConfig.address}
           </span>
+
         </div>
       </div>
     </div>
