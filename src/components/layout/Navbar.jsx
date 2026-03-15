@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineShoppingBag, HiOutlineSquares2X2 } from "react-icons/hi2";
 import { IoClose, IoMenu } from "react-icons/io5";
+import { createPortal } from "react-dom";
 import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
 import logo from "../../assets/images/logo.png";
@@ -20,10 +21,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const nav = navRef.current;
+
     gsap.fromTo(nav, { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
 
     const handleScroll = () => {
       const active = window.scrollY > 18;
+
       gsap.to(nav, {
         y: 0,
         backgroundColor: active ? "rgba(255,250,244,0.9)" : "rgba(255,250,244,0.6)",
@@ -35,22 +38,63 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
+
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [open]);
 
   const linkClass = ({ isActive }) =>
-    `transition-colors duration-200 ${isActive ? "text-[var(--primary-dark)]" : "text-neutral-700 hover:text-[var(--primary-dark)]"}`;
+    `transition-colors duration-200 ${
+      isActive ? "text-[var(--primary-dark)]" : "text-neutral-700 hover:text-[var(--primary-dark)]"
+    }`;
+
+  const mobileLinkClass = ({ isActive }) =>
+    `rounded-[18px] border px-4 py-3 text-right transition-all duration-200 ${
+      isActive
+        ? "border-[rgba(157,123,75,0.38)] bg-[rgba(157,123,75,0.12)] text-[var(--primary-dark)]"
+        : "border-[var(--line)] bg-white text-[var(--foreground)] hover:border-[rgba(157,123,75,0.28)]"
+    }`;
+
+  const mobileMenu = (
+    <div className="fixed inset-0 z-[9999] bg-black/80 lg:hidden">
+      <div className="mr-auto mt-4 flex min-h-[70vh] w-[88%] max-w-sm flex-col gap-8 rounded-b-[32px] border-l border-[#e8dcc9] bg-white p-6 text-[var(--foreground)] shadow-2xl">
+        <div className="flex items-center justify-between">
+          <img src={logo} alt="We Office Land" className="h-12 w-auto object-contain" />
+          <button className="rounded-full border border-[var(--line)] bg-white p-3 text-[var(--foreground)]" onClick={() => setOpen(false)}>
+            <IoClose size={22} />
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-4 text-lg font-semibold">
+          {navLinks.map((link) => (
+            <NavLink key={link.to} to={link.to} className={mobileLinkClass} onClick={() => setOpen(false)}>
+              {link.label}
+            </NavLink>
+          ))}
+        </div>
+
+        <div className="mt-auto flex flex-col gap-3">
+          <NavLink to="/categories" className="btn-ghost h-14 w-full border-[var(--line)] bg-white text-[var(--foreground)]" onClick={() => setOpen(false)}>
+            تصفح المنتجات
+          </NavLink>
+          <NavLink to="/cart" className="btn-primary h-14 w-full" onClick={() => setOpen(false)}>
+            السلة {quantity > 0 ? `(${quantity})` : ""}
+          </NavLink>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <header ref={navRef} className="sticky top-0 z-50 border-b border-white/40 bg-[rgba(255,250,244,0.6)]">
-      <nav className="container-shell flex items-center justify-between py-4">
+    <header className="sticky top-0 z-50 border-b border-white/40 bg-[rgba(255,250,244,0.6)]">
+      <nav ref={navRef} className="container-shell flex items-center justify-between py-4">
         <NavLink to="/" className="flex items-center gap-3">
           <img src={logo} alt="We Office Land" className="h-20 w-auto object-contain" />
         </NavLink>
@@ -84,35 +128,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {open && (
-        <div className="fixed inset-0 z-[60] bg-black/45 lg:hidden">
-          <div className="mr-auto flex h-full w-[88%] max-w-sm flex-col gap-8 bg-[var(--background-alt)] p-6 shadow-2xl">
-            <div className="flex items-center justify-between">
-              <img src={logo} alt="We Office Land" className="h-12 w-auto object-contain" />
-              <button className="rounded-full border border-[var(--line)] p-3" onClick={() => setOpen(false)}>
-                <IoClose size={22} />
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-4 text-lg font-semibold">
-              {navLinks.map((link) => (
-                <NavLink key={link.to} to={link.to} className={linkClass} onClick={() => setOpen(false)}>
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
-
-            <div className="mt-auto flex flex-col gap-3">
-              <NavLink to="/categories" className="btn-ghost" onClick={() => setOpen(false)}>
-                تصفح المنتجات
-              </NavLink>
-              <NavLink to="/cart" className="btn-primary" onClick={() => setOpen(false)}>
-                السلة {quantity > 0 ? `(${quantity})` : ""}
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      )}
+      {open && createPortal(mobileMenu, document.body)}
     </header>
   );
 }

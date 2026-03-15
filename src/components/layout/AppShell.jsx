@@ -9,15 +9,19 @@ export default function AppShell() {
   const location = useLocation();
 
   useEffect(() => {
+    // يعيد التمرير إلى أعلى الصفحة عند تغيير الـ route.
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
   return (
     <div className="page-shell">
+      {/* عناصر ثابتة تظهر في جميع صفحات الموقع */}
       <TopBar />
       <Navbar />
+      {/* الصفحة الحالية التي يتم حقنها من React Router */}
       <Outlet />
       <Footer />
+      {/* زر واتساب ثابت لتسهيل التواصل من أي صفحة */}
       <FloatingWhatsAppButton />
     </div>
   );

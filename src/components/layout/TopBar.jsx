@@ -5,12 +5,14 @@ export default function TopBar() {
   return (
     <div className="border-b border-white/20 bg-[#17342e] text-sm text-white">
       <div className="container-shell flex flex-col gap-2 py-3 md:flex-row md:items-center md:justify-between">
+        {/* تعريف سريع بطبيعة المتجر وتخصصه */}
         <p className="font-semibold text-white/90">
           أثاث مكتبي فاخر للمكاتب التنفيذية، الاستقبال، وغرف الاجتماعات.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 text-white/80">
           
+          {/* رقم الهاتف قابل للنقر للاتصال المباشر */}
           <a
             href={`tel:${siteConfig.phone}`}
             className="inline-flex items-center gap-2 hover:text-white transition"
@@ -19,6 +21,7 @@ export default function TopBar() {
             <span dir="ltr">{siteConfig.phoneDisplay}</span>
           </a>
 
+          {/* العنوان أو نطاق الخدمة */}
           <span className="inline-flex items-center gap-2">
             <HiMiniMapPin />
             {siteConfig.address}

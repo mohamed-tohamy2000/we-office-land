@@ -6,6 +6,7 @@ export default function Footer() {
   return (
     <footer className="mt-16 bg-[#161511] text-white">
       <div className="container-shell section-space grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        {/* نبذة مختصرة عن العلامة التجارية */}
         <div className="space-y-4">
           <p className="section-kicker text-sm font-bold text-[#d4bd93]">WE OFFICE LAND</p>
           <h3 className="text-3xl font-extrabold">أثاث مكتبي مصمم ليُظهر قوة المساحة وأناقتها.</h3>
@@ -14,6 +15,7 @@ export default function Footer() {
           </p>
         </div>
 
+        {/* روابط داخلية سريعة لأهم صفحات الموقع */}
         <div className="space-y-4">
           <h4 className="text-lg font-bold text-[#f3e4c7]">روابط سريعة</h4>
           <div className="flex flex-col gap-3 text-white/70">
@@ -25,6 +27,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* معلومات التواصل الأساسية الظاهرة داخل الفوتر */}
         <div className="space-y-4">
           <h4 className="text-lg font-bold text-[#f3e4c7]">بيانات التواصل</h4>
           <div className="space-y-3 text-white/70">
@@ -43,6 +46,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      {/* سطر الحقوق في نهاية الصفحة */}
       <div className="border-t border-white/10 py-5 text-center text-sm text-white/50">
         © 2026 {siteConfig.brandName}. جميع الحقوق محفوظة.
       </div>
