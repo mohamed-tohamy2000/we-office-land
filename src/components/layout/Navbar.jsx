@@ -29,9 +29,9 @@ export default function Navbar() {
 
       gsap.to(nav, {
         y: 0,
-        backgroundColor: active ? "rgba(255,250,244,0.78)" : "rgba(255,250,244,0.24)",
-        backdropFilter: "blur(18px)",
-        boxShadow: active ? "0 18px 42px rgba(34, 24, 13, 0.12)" : "0 8px 20px rgba(34, 24, 13, 0.06)",
+        backgroundColor: active ? "rgba(255,250,244,0.78)" : "rgba(255,250,244,0)",
+        backdropFilter: active ? "blur(18px)" : "blur(0px)",
+        boxShadow: active ? "0 18px 42px rgba(34, 24, 13, 0.12)" : "0 0 0 rgba(0,0,0,0)",
         duration: 0.25,
       });
     };
