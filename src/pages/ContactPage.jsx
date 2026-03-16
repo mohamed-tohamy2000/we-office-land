@@ -25,7 +25,9 @@ export default function ContactPage() {
                 <HiOutlineEnvelope className="text-xl text-[var(--primary)]" />
                 {siteConfig.email}
               </p>
-              <p>{siteConfig.address}</p>
+              <a href={siteConfig.mapUrl} target="_blank" rel="noreferrer" className="hover:text-[var(--foreground)] transition">
+                {siteConfig.address}
+              </a>
             </div>
             <a href={createWhatsAppLink("مرحبًا، أحتاج عرض أسعار لأثاث مكتبي.")} target="_blank" rel="noreferrer" className="btn-primary w-full">
               <HiOutlineChatBubbleOvalLeftEllipsis />

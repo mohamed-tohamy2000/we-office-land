@@ -6,4 +6,5 @@ export const siteConfig = {
   phoneDisplay: "+20 102 213 5678",
   email: "sales@weofficeland.com",
   address: "القاهرة الجديدة، مدينة نصر",
+  mapUrl: "https://maps.app.goo.gl/UwXMjYX7ytd9qwvY7",
 };

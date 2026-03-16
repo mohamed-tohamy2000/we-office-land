@@ -21,11 +21,16 @@ export default function TopBar() {
             <span dir="ltr">{siteConfig.phoneDisplay}</span>
           </a>
 
-          {/* العنوان أو نطاق الخدمة */}
-          <span className="inline-flex items-center gap-2">
+          {/* العنوان يفتح موقع المعرض الفعلي على الخريطة */}
+          <a
+            href={siteConfig.mapUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 hover:text-white transition"
+          >
             <HiMiniMapPin />
             {siteConfig.address}
-          </span>
+          </a>
 
         </div>
       </div>

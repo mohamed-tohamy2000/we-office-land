@@ -42,7 +42,9 @@ export default function Footer() {
               <HiOutlineEnvelope />
               {siteConfig.email}
             </p>
-            <p>{siteConfig.address}</p>
+            <a href={siteConfig.mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-white transition">
+              {siteConfig.address}
+            </a>
           </div>
         </div>
       </div>
