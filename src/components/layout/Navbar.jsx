@@ -29,7 +29,7 @@ export default function Navbar() {
 
       gsap.to(nav, {
         y: 0,
-        backgroundColor: active ? "rgba(255,250,244,0.9)" : "rgba(255,250,244,0.6)",
+        backgroundColor: active ? "rgba(255,250,244,0.78)" : "rgba(255,250,244,0.24)",
         backdropFilter: "blur(18px)",
         boxShadow: active ? "0 18px 42px rgba(34, 24, 13, 0.12)" : "0 8px 20px rgba(34, 24, 13, 0.06)",
         duration: 0.25,
@@ -93,7 +93,7 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/40 bg-[rgba(255,250,244,0.6)]">
+    <header className="sticky top-0 z-50 border-b border-white/15 bg-transparent">
       <nav ref={navRef} className="container-shell flex items-center justify-between py-4">
         <NavLink to="/" className="flex items-center gap-3">
           <img src={logo} alt="We Office Land" className="h-20 w-auto object-contain" />
