@@ -1,4 +1,7 @@
-export default function CheckoutForm({ values, onChange }) {
+export default function CheckoutForm({ values, onChange, showErrors = false }) {
+  const inputClass = (fieldName) =>
+    `input-shell ${showErrors && !values[fieldName].trim() ? "border-[var(--danger)] bg-[rgba(161,61,45,0.04)]" : ""}`;
+
   return (
     <div className="premium-card space-y-5 p-6">
       <div>
@@ -8,19 +11,19 @@ export default function CheckoutForm({ values, onChange }) {
       <div className="grid gap-4 md:grid-cols-2">
         <label className="space-y-2">
           <span className="font-bold">الاسم</span>
-          <input className="input-shell" name="name" value={values.name} onChange={onChange} placeholder="الاسم الكامل" />
+          <input className={inputClass("name")} name="name" value={values.name} onChange={onChange} placeholder="الاسم الكامل" />
         </label>
         <label className="space-y-2">
           <span className="font-bold">رقم الهاتف</span>
-          <input className="input-shell" name="phone" value={values.phone} onChange={onChange} placeholder="01xxxxxxxxx" />
+          <input className={inputClass("phone")} name="phone" value={values.phone} onChange={onChange} placeholder="01xxxxxxxxx" />
         </label>
         <label className="space-y-2">
           <span className="font-bold">المدينة</span>
-          <input className="input-shell" name="city" value={values.city} onChange={onChange} placeholder="القاهرة" />
+          <input className={inputClass("city")} name="city" value={values.city} onChange={onChange} placeholder="القاهرة" />
         </label>
         <label className="space-y-2">
           <span className="font-bold">العنوان</span>
-          <input className="input-shell" name="address" value={values.address} onChange={onChange} placeholder="الحي، الشارع، رقم المبنى" />
+          <input className={inputClass("address")} name="address" value={values.address} onChange={onChange} placeholder="الحي، الشارع، رقم المبنى" />
         </label>
       </div>
       <label className="space-y-2">

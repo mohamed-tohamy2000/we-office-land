@@ -15,17 +15,31 @@ const initialForm = {
   notes: "",
 };
 
+const requiredFields = ["name", "phone", "city", "address"];
+
 export default function CheckoutPage() {
   const { items, subtotal, estimatedTotal } = useCart();
   const [formValues, setFormValues] = useState(initialForm);
+  const [showErrors, setShowErrors] = useState(false);
 
   const totals = useMemo(() => ({ subtotal, estimatedTotal }), [estimatedTotal, subtotal]);
   const orderMessage = useMemo(() => generateOrderMessage(formValues, items, totals), [formValues, items, totals]);
   const whatsappLink = createWhatsAppLink(orderMessage);
+  const missingFields = requiredFields.filter((field) => !formValues[field].trim());
+  const isFormValid = missingFields.length === 0;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleWhatsAppClick = (event) => {
+    if (isFormValid) {
+      return;
+    }
+
+    event.preventDefault();
+    setShowErrors(true);
   };
 
   if (items.length === 0) {
@@ -55,10 +69,22 @@ export default function CheckoutPage() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr]">
-          <CheckoutForm values={formValues} onChange={handleChange} />
+          <CheckoutForm values={formValues} onChange={handleChange} showErrors={showErrors} />
           <div className="space-y-6">
             <InvoicePreview customer={formValues} items={items} totals={totals} />
-            <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-primary w-full">
+            {!isFormValid && showErrors && (
+              <p className="rounded-[18px] border border-[var(--danger)] bg-[rgba(161,61,45,0.08)] px-4 py-3 text-sm font-semibold text-[var(--danger)]">
+                من فضلك املأ الاسم ورقم الهاتف والمدينة والعنوان أولًا قبل إرسال الطلب عبر واتساب.
+              </p>
+            )}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              onClick={handleWhatsAppClick}
+              aria-disabled={!isFormValid}
+              className={`btn-primary w-full ${!isFormValid ? "cursor-not-allowed opacity-70" : ""}`}
+            >
               <HiOutlineChatBubbleOvalLeftEllipsis />
               إرسال الطلب عبر واتساب
             </a>
