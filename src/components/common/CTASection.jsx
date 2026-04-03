@@ -19,7 +19,7 @@ export default function CTASection() {
                 فريقنا يساعدك في اختيار التكوين المناسب للمكاتب، الكراسي، الاستقبال، والاجتماعات مع عرض سعر واضح وسريع.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
               <Link to="/categories" className="btn-primary">
                 <HiArrowLeft />
                 تصفح المنتجات

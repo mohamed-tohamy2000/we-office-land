@@ -73,7 +73,7 @@ export default function HeroSection() {
             في We Office Land نقدم كراسي المديرين والموظفين، مكاتب الاستقبال، محطات العمل، جلسات الانتظار، وطاولات الاجتماعات
             بتفاصيل تعكس الثقة والراحة وجودة التنفيذ.
           </p>
-          <div data-hero-actions className="flex flex-col gap-3 sm:flex-row">
+          <div data-hero-actions className="flex flex-col gap-4 sm:flex-row sm:gap-3">
             <Link to="/categories" className="btn-primary">
               <HiArrowLeft />
               تصفح المنتجات

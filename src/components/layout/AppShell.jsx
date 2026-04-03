@@ -1,27 +1,46 @@
+import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import FloatingWhatsAppButton from "../common/FloatingWhatsAppButton";
 import Footer from "./Footer";
+import IntroLoader from "./IntroLoader";
 import Navbar from "./Navbar";
 import TopBar from "./TopBar";
 
 export default function AppShell() {
   const location = useLocation();
+  const [loaderClosing, setLoaderClosing] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    // يعيد التمرير إلى أعلى الصفحة عند تغيير الـ route.
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
+  useEffect(() => {
+    const closeTimer = window.setTimeout(() => setLoaderClosing(true), 1500);
+    const removeTimer = window.setTimeout(() => setShowLoader(false), 2150);
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.clearTimeout(closeTimer);
+      window.clearTimeout(removeTimer);
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showLoader) {
+      document.body.style.overflow = "auto";
+    }
+  }, [showLoader]);
+
   return (
     <div className="page-shell">
-      {/* عناصر ثابتة تظهر في جميع صفحات الموقع */}
+      {showLoader && <IntroLoader closing={loaderClosing} />}
       <TopBar />
       <Navbar />
-      {/* الصفحة الحالية التي يتم حقنها من React Router */}
       <Outlet />
       <Footer />
-      {/* زر واتساب ثابت لتسهيل التواصل من أي صفحة */}
       <FloatingWhatsAppButton />
     </div>
   );
