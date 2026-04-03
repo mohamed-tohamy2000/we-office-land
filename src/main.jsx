@@ -9,11 +9,11 @@ document.documentElement.lang = "ar";
 document.documentElement.dir = "rtl";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  
     <BrowserRouter>
       <CartProvider>
         <App />
       </CartProvider>
     </BrowserRouter>
-  </StrictMode>
+  
 );
